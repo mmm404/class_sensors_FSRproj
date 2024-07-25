@@ -1,0 +1,28 @@
+const int potPin = A0;  
+const int ledPins[] = {2, 3, 4, 5, 6, 7, 8, 9}; 
+const float numLeds = 5;  
+
+void setup() {
+
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+
+  float potValue = analogRead(potPin);
+  Serial.print(potValue);
+  float ledsOn = potValue*5/1023;
+  Serial.print(" - ");
+  Serial.print(ledsOn);
+  for (int i = 0; i < numLeds; i++) {
+    if (i < ledsOn) {
+      digitalWrite(ledPins[i], HIGH);
+    } else {
+      digitalWrite(ledPins[i], LOW);
+    }
+  }
+  
+  delay(50); 
+}
